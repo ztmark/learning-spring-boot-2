@@ -20,7 +20,7 @@ public class ImagesController {
 
     private static final Logger logger = LoggerFactory.getLogger(ImagesController.class);
 
-    @GetMapping("/images")
+    @GetMapping("/images-test")
     Flux<Image> images() {
         return Flux.just(
                 new Image(1, "image one"),
@@ -29,7 +29,7 @@ public class ImagesController {
         );
     }
 
-    @PostMapping("/images")
+    @PostMapping("/images-test")
     Mono<Void> create(@RequestBody Flux<Image> images) {
         return images.map(image -> {
             logger.info("We will save {} to a reactive database soon", image);

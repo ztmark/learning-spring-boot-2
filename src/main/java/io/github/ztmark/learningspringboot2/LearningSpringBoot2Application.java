@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import com.sun.tracing.ProbeName;
 
@@ -30,6 +31,11 @@ public class LearningSpringBoot2Application {
                 .flatMap(repository::save)
                 .subscribe(System.out::println);
         };
+    }
+
+    @Bean
+    HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 
 }

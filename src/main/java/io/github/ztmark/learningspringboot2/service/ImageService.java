@@ -39,9 +39,9 @@ public class ImageService {
         return args -> {
             FileSystemUtils.deleteRecursively(new File(UPLOAD_ROOT));
             Files.createDirectories(Paths.get(UPLOAD_ROOT));
-            FileCopyUtils.copy("Test file1", new FileWriter(UPLOAD_ROOT + "image1.jpg"));
-            FileCopyUtils.copy("Test file2", new FileWriter(UPLOAD_ROOT + "image2.jpg"));
-            FileCopyUtils.copy("Test file3", new FileWriter(UPLOAD_ROOT + "image3.jpg"));
+            FileCopyUtils.copy("Test file1", new FileWriter(UPLOAD_ROOT + "/avatar1.jpg"));
+            FileCopyUtils.copy("Test file2", new FileWriter(UPLOAD_ROOT + "/image2.jpg"));
+            FileCopyUtils.copy("Test file3", new FileWriter(UPLOAD_ROOT + "/image3.jpg"));
         };
     }
 
