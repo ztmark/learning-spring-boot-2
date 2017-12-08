@@ -20,18 +20,18 @@ public class LearningSpringBoot2Application {
     }
 
 
-    @Bean
-    CommandLineRunner init(ChapterRepository repository) {
-        return args -> {
-            Flux.just(
-                    new Chapter("Quick Start with Java"),
-                    new Chapter("Reactive Web with Spring Boot"),
-                    new Chapter("... and more"),
-                    new Chapter("Quick Start with Java"))
-                .flatMap(repository::save)
-                .subscribe(System.out::println);
-        };
-    }
+//    @Bean
+//    CommandLineRunner init(ChapterRepository repository) {
+//        return args -> {
+//            Flux.just(
+//                    new Chapter("Quick Start with Java"),
+//                    new Chapter("Reactive Web with Spring Boot"),
+//                    new Chapter("... and more"),
+//                    new Chapter("Quick Start with Java"))
+//                .flatMap(repository::save)
+//                .subscribe(System.out::println);
+//        };
+//    }
 
     @Bean
     HiddenHttpMethodFilter hiddenHttpMethodFilter() {

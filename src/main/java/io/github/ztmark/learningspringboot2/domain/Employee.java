@@ -3,22 +3,19 @@ package io.github.ztmark.learningspringboot2.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Author: Mark
- * Date  : 2017/12/7
+ * Date  : 2017/12/8
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Document
-public class Image {
+@Document(collection = "employees")
+public class Employee {
 
     @Id
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
 
 }

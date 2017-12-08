@@ -23,9 +23,9 @@ public class ImagesController {
     @GetMapping("/images-test")
     Flux<Image> images() {
         return Flux.just(
-                new Image(1, "image one"),
-                new Image(2, "image two"),
-                new Image(3, "image three")
+                new Image("1", "image one"),
+                new Image("2", "image two"),
+                new Image("3", "image three")
         );
     }
 
