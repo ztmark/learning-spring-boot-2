@@ -3,3 +3,13 @@ logging:
     io:
       netty: DEBUG
     reactor: DEBUG
+
+management:
+  endpoints:
+    web:
+      enabled: true
+      expose: "*"
+  info:
+    git:
+      mode: full
+

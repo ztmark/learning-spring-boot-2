@@ -18,6 +18,7 @@ import org.springframework.util.FileSystemUtils;
 
 import io.github.ztmark.learningspringboot2.dao.ImageRepository;
 import io.github.ztmark.learningspringboot2.domain.Image;
+import io.micrometer.core.instrument.MeterRegistry;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -32,10 +33,12 @@ public class ImageService {
     private static String UPLOAD_ROOT = "upload-dir";
     private final ResourceLoader resourceLoader;
     private final ImageRepository imageRepository;
+    private final MeterRegistry meterRegistry;
 
-    public ImageService(ResourceLoader resourceLoader, ImageRepository imageRepository) {
+    public ImageService(ResourceLoader resourceLoader, ImageRepository imageRepository, MeterRegistry meterRegistry) {
         this.resourceLoader = resourceLoader;
         this.imageRepository = imageRepository;
+        this.meterRegistry = meterRegistry;
     }
 
     @Bean
@@ -74,7 +77,12 @@ public class ImageService {
                                        .log("createImage-newfile")
                                        .flatMap(file::transferTo)
                                        .log("createImage-copy");
-            return Mono.when(save, copy);
+            final Mono<Void> countFile = Mono.fromRunnable(() -> {
+                meterRegistry.summary("files.uploaded.bytes")
+                             .record(Paths.get(UPLOAD_ROOT, file.filename()).toFile().length());
+            });
+
+            return Mono.when(save, copy, countFile);
         }).then();
 
     }
